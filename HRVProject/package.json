@@ -1,0 +1,16 @@
+{
+  "name": "HRV+BreathTraining",
+  "description": "",
+  "version": "0.0.0",
+  "main": "server.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "dependencies": {
+      "socket.io":"latest",
+      "python-shell" : "latest",
+      "performance-now" : "latest",
+      "bonescript" : "latest",
+      "fs-extra": "latest"
+  }
+}
