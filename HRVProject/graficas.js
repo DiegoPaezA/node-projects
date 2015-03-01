@@ -22,8 +22,12 @@ $(function(){
                 }
               }
             },
-            rangeSelector : {
-                selected : 100
+            plotOptions: {
+            series: {
+                color: 'black',
+                marker: {  enabled: true, fillColor: '#BF0B23', radius: 2 },
+                lineWidth: 1
+                }
             },
             title: {
                 text: 'HRV'
@@ -68,8 +72,12 @@ $(function(){
                 }
               }
             },
-            rangeSelector : {
-                selected : 100
+            plotOptions: {
+            series: {
+                color: 'black',
+                marker: {  enabled: true, fillColor: '#BF0B23', radius: 2 },
+                lineWidth: 1
+                }
             },
             title: {
                 text: 'HRV'

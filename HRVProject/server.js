@@ -4,7 +4,6 @@ var fs = require('fs');
 var path = require('path');
 var b = require('bonescript');
 var now = require("performance-now");
-var fs = require("fs");
 var PythonShell = require('python-shell');
 var fse = require('fs-extra')
 // Create a variable called led, which refers to P9_14
