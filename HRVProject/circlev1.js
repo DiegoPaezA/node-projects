@@ -50,7 +50,7 @@ $(function() {
 		controlRadio = 1;
 		context.clearRect(0, 0, canvas.width(), canvas.height());
 		console.log("Radius--" + myCircle.radius);
-		myCircle.radius = 150;
+		myCircle.radius = (Math.sqrt((((canvas.width()) / 2)*((canvas.height()) / 2))/Math.PI)) - 40;
 		drawCircle(myCircle, context);
 		$("#parar").addClass('disabled');
 		$("#arrancar").removeClass('disabled');
@@ -107,7 +107,7 @@ $(function() {
 		if (controlRadio == 1) {
 			//code
 			mensaje.html("IN");
-			myCircle.radius += 0.5;
+			myCircle.radius += 0.6;
 			drawCircle(myCircle, context);
 			console.log("aumenta radio");
 			document.body.style.background = "#a6d8f1"; //change background color
@@ -120,7 +120,7 @@ $(function() {
 		} else if (controlRadio == 3) {
 			//code
 			mensaje.html("OUT");
-			myCircle.radius -= 0.5;
+			myCircle.radius -= 0.6;
 			drawCircle(myCircle, context);
 			console.log("radio disminuye");
 			document.body.style.background = "#EFE23E"; //change background color
@@ -170,7 +170,7 @@ $(function() {
 	var myCircle = {
 		x: (canvas.width()) / 2,
 		y: (canvas.height()) / 2,
-		radius: 150,
+		radius: (Math.sqrt((((canvas.width()) / 2)*((canvas.height()) / 2))/Math.PI)) - 40,
 		startAngle: 0,
 		endAngle: 2 * Math.PI,
 		borderWidth: 1,
