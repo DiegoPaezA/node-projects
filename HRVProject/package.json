@@ -11,9 +11,6 @@
       "python-shell" : "latest",
       "performance-now" : "latest",
       "bonescript" : "latest",
-      "fs-extra": "latest",
-      "mkdirp": "latest"
-
-      
+      "fs-extra": "latest"
   }
 }

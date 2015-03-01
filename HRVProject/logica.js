@@ -7,7 +7,7 @@ $(function() {
 			clearInterval(t);
 			t = undefined;
 			seconds.stop()
-			socket.emit('changeState', '{"state":0}');
+			
 			$("#parar").addClass('disabled');
 			window.location.href = "/circulo.html";
 		}

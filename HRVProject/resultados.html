@@ -15,21 +15,22 @@
     <script>
         // Establishing connection with server
         var socket = io.connect();
+		socket.emit('changeState', '{"state":0}');
 
         // Changes the led state
         function changeState(state){
             if (state==0){
             //
-            socket.emit('changeState', '{"state":0}');
+            //socket.emit('changeState', '{"state":0}');
             // Change led status on web page to OFF
-            document.getElementById("outputStatus").innerHTML = "Status: Home";
-            window.location.href = "index.html";
+            //document.getElementById("outputStatus").innerHTML = "Status: Home";
+            window.location.href = "basal.html";
             }
             else if (state==2){
                 // Emit message changing the state to 0
                 socket.emit('changeState', '{"state":2}');
                 // Change led status on web page to OFF
-                document.getElementById("outputStatus").innerHTML = "Status: Plot";
+                //document.getElementById("outputStatus").innerHTML = "Status: Plot";
             }
         }
     </script>
@@ -38,19 +39,20 @@
 <body>
   <div class="container">
       <div class="jumbotron">
-          <h1  class="text-center">Resultados</h1>
+          <h2  class="text-center">Resultados</h2>
       </div>
 	<div class="row">
-
-	    <p id="outputStatus">Status</p>
-      <h2 class="text-center">Graficar Resultados</h2>
+      <h3 class="text-center">Visualizar resultados del comportamiento de la VFC</h3>
       <br>
       <p class="text-center">
 
 	    <button type="button" class="btn btn-success btn-lg" onclick="changeState(2);">Plot</button>
 	    <button type="button" class="btn btn-success btn-lg" onclick="changeState(0);">Home</button>
+	  <hr>
+	  <p>Sin entrenamiento.</p>
       <div id="chart_A" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
       <hr>
+	  <p>Con entrenamiento.</p>
       <div id="chart_B" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
   </p>
   </div>
@@ -59,7 +61,7 @@
   <div class="row">
       <div class="col-sm-12">
           <footer>
-              <p>Developed By: Diego Páez Ardila</p>
+              <p>Developed By: </p>
           </footer>
         </div>
       </div>

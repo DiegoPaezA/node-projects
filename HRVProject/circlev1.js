@@ -106,20 +106,20 @@ $(function() {
 		context.clearRect(0, 0, canvas.width(), canvas.height());
 		if (controlRadio == 1) {
 			//code
-			mensaje.html("IN");
+			mensaje.html("Inhalar");
 			myCircle.radius += 0.6;
 			drawCircle(myCircle, context);
 			//console.log("aumenta radio");
 			document.body.style.background = "#a6d8f1"; //change background color
 		} else if (controlRadio == 2) {
 			//code
-			mensaje.html("HOLD");
+			mensaje.html("Mantener");
 			//console.log("radio no aumenta");
 			drawCircle(myCircle, context);
 			document.body.style.background = "#FFBEA0"; //change background color
 		} else if (controlRadio == 3) {
 			//code
-			mensaje.html("OUT");
+			mensaje.html("Exhalar");
 			myCircle.radius -= 0.6;
 			drawCircle(myCircle, context);
 			//console.log("radio disminuye");
@@ -179,6 +179,7 @@ $(function() {
 	
 	var socket = io.connect();
 	socket.emit('changeState', '{"state":5}');
+	socket.emit('changeState', '{"state":0}');
 	socket.on('showRR', function(data) {
 		//console.log("client receve rr: " + data);
 		document.getElementById("outputStatus").innerHTML = "rr: " + String(data);

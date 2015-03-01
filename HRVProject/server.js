@@ -8,7 +8,7 @@ var PythonShell = require('python-shell');
 var fse = require('fs-extra')
 // Create a variable called led, which refers to P9_14
 var led = "P9_11";
-var inputPin = 'P9_24';
+var inputPin = 'P9_12';
 // Initialize the led as an OUTPUT
 b.pinMode(led, b.OUTPUT);
 b.pinMode(inputPin, b.INPUT);
@@ -41,7 +41,7 @@ var server = http.createServer(function(req, res) {
 			res.end('Page not found');
 		}
 	})
-}).listen(8888);
+}).listen(8000);
 
 // Loading socket io module
 var io = require('socket.io').listen(server);
@@ -175,10 +175,10 @@ function newdir(){
 	date = new Date().toISOString().substr(0, 16);
 	__dirname  = 'data/' 
 	dir =__dirname  + (date) + "/";
-	console.log(dir)
+	//console.log(dir)
 	fse.mkdirs(dir, function (err) {
 	  if (err) return console.error(err)
-	  console.log("success!")
+	  //console.log("success!")
 	})
 }
 
