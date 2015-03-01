@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Breathing Trainer and HRV</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" >
+<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/progressbar.js"></script>
+<script src="logica.js"></script>
+<script src = "/socket.io/socket.io.js" ></script>
+
+<style>
+    .progress {
+        height: 200px;
+        background: #ffffff;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -o-border-radius: 5px;
+        border-radius: 5px;
+        padding: 15px;
+        font-size: 60px;
+
+    }
+    .progress > svg {
+        height: 100%;
+        display: block;
+    }
+</style>
+
+</head>
+<body>
+<nav id="myNavbar" class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Breath Trainer</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="http://www.tutorialrepublic.com" target="_blank">Home</a></li>
+                <li><a href="http://www.tutorialrepublic.com/about-us.php" target="_blank">About</a></li>
+                <li><a href="http://www.tutorialrepublic.com/contact-us.php" target="_blank">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="jumbotron">
+        <h1  class="text-center">Breathing Trainer</h1>
+    </div>
+    <div class="row">
+      <img class="img-responsive center-block" src="imagenes/diaphragmatic_breathing.png" alt="Chania">
+      <br>
+      <p class="text-center">
+        <button type="button" id="arrancar" class="btn btn-success btn-lg">Start</button>
+        <button type="button" id="parar" class="btn btn-success btn-lg disabled">Stop</button>
+        <a href="/circulo.html"  id="skip" class="btn btn-success btn-lg">Skip</a>
+      </p>
+      <h3 class="text-center"> Wait For Calibration </h3>
+      <p id="outputStatus">Status</p>
+      <br>
+      <div class="progress center-block" id="progress"></div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <footer>
+                <p>Developed By: Diego Páez Ardila</p>
+            </footer>
+          </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8" name="viewport" content="width=device-width" />
+    <title>Resultados</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/highcharts.js"></script>
+    <script src="graficas.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+
+    <script src = "/socket.io/socket.io.js" ></script>
+    <script>
+        // Establishing connection with server
+        var socket = io.connect();
+
+        // Changes the led state
+        function changeState(state){
+            if (state==0){
+            //
+            socket.emit('changeState', '{"state":0}');
+            // Change led status on web page to OFF
+            document.getElementById("outputStatus").innerHTML = "Status: Home";
+            window.location.href = "index.html";
+            }
+            else if (state==2){
+                // Emit message changing the state to 0
+                socket.emit('changeState', '{"state":2}');
+                // Change led status on web page to OFF
+                document.getElementById("outputStatus").innerHTML = "Status: Plot";
+            }
+        }
+    </script>
+
+</head>
+<body>
+  <div class="container">
+      <div class="jumbotron">
+          <h1  class="text-center">Resultados</h1>
+      </div>
+	<div class="row">
+
+	    <p id="outputStatus">Status</p>
+      <h2 class="text-center">Graficar Resultados</h2>
+      <br>
+      <p class="text-center">
+
+	    <button type="button" class="btn btn-success btn-lg" onclick="changeState(2);">Plot</button>
+	    <button type="button" class="btn btn-success btn-lg" onclick="changeState(0);">Home</button>
+      <div id="chart_A" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+      <hr>
+      <div id="chart_B" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+  </p>
+  </div>
+  <br>
+  <hr>
+  <div class="row">
+      <div class="col-sm-12">
+          <footer>
+              <p>Developed By: Diego Páez Ardila</p>
+          </footer>
+        </div>
+      </div>
+</body>
+</html>

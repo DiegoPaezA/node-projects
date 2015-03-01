@@ -1,0 +1,74 @@
+<!doctype html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Train</title>
+		<meta name="HandheldFriendly" content="True">
+		<meta name="MobileOptimized" content="320" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="cleartype" content="on">
+
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+		<script src="js/jquery-1.11.3.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/soundjs-0.6.1.min.js"></script>
+		<script src="circlev1.js"></script>
+		<script src = "/socket.io/socket.io.js" ></script>
+
+		<style>
+			html,
+			body {
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			body {
+				display: block;
+				width: 100%;
+				height: 100%;
+			}
+			
+			.main {
+				display: block;
+				width: 80%;
+				padding: 50px 10%;
+				height: 500px;
+			}
+		</style>
+
+</head>
+
+<body id="cuerpo">
+	<div class="container">
+		<div class="jumbotron other-color">
+			<h2 class="text-center">Breathing Trainer</h2>
+		</div>
+		<div class="row">
+			<div class="main center-block " role="main">
+				<canvas id="respondCanvas" width="100" height="100">
+					<!-- Provide fallback -->
+				</canvas>
+				<h3 class="text-center"><p id= "msn">Seguir Indicaciones</p></h3>
+			</div>
+			<br>
+			<p class="text-center">
+				<button type="button" id="arrancar" class="btn btn-success btn-lg">Start</button>
+				<button type="button" id="parar" class="btn btn-success btn-lg disabled">Stop</button>
+			</p>
+			<h3 class="text-center"> <a id= "minutos">5</a>:<a id="segundos">00</a></h3>
+			<br>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-12">
+				<footer>
+					<p>Developed By: Diego Páez Ardila</p>
+				</footer>
+			</div>
+		</div>
+	</div>
+	</div>
+</body>
+
+</html>
