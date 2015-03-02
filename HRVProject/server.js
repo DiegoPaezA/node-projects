@@ -2,6 +2,7 @@
 var http = require('http');
 var fs = require('fs');
 var path = require('path');
+var url = require("url");
 var b = require('bonescript');
 var now = require("performance-now");
 var PythonShell = require('python-shell');
@@ -16,11 +17,13 @@ b.pinMode(inputPin, b.INPUT);
 // Initialize the server on port 8888
 var server = http.createServer(function(req, res) {
 	// requesting files
-	var file = '.' + ((req.url == '/') ? '/index.html' : req.url);
+	var pathname = url.parse(req.url).pathname;
+    console.log("Request for " + pathname + " received.");
+	var file = '..' + ((req.url == '/') ? '/home/Developer/node-projects/HRVProject/index.html' : req.url);
+	console.log()
 	var fileExtension = path.extname(file);
 	var contentType = 'text/html';
 	// Uncoment if you want to add css to your web page
-
 	if (fileExtension == '.css') {
 		contentType = 'text/css';
 	}
@@ -173,7 +176,7 @@ function epython() {
 
 function newdir(){
 	date = new Date().toISOString().substr(0, 16);
-	__dirname  = 'data/' 
+	__dirname  = '/home/Developer/node-projects/HRVProject/data/' 
 	dir =__dirname  + (date) + "/";
 	//console.log(dir)
 	fse.mkdirs(dir, function (err) {

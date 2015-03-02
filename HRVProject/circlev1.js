@@ -9,7 +9,7 @@ $(function() {
 			clearInterval(t);
 			t = undefined;
 			socket.emit('changeState', '{"state":0}');
-			window.location.href = "resultados.html";
+			window.location.href = "/home/Developer/node-projects/HRVProject/resultados.html";
 		}
 		minutos = parseInt(tempo / 60);
 		segundos = pad(parseInt(tempo % 60));

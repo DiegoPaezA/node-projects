@@ -9,7 +9,7 @@ $(function() {
 			seconds.stop()
 			
 			$("#parar").addClass('disabled');
-			window.location.href = "/circulo.html";
+			window.location.href = "/home/Developer/node-projects/HRVProject/circulo.html";
 		}
 		minutos = parseInt(tempo / 60);
 		segundos = pad(parseInt(tempo % 60));
