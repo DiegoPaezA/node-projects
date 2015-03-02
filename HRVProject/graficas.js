@@ -48,6 +48,7 @@ $(function(){
             },
             series: [{
                 name: "HRV - 1",
+                dashStyle: 'longdash',
                 data: []
             }]
         });
@@ -98,6 +99,7 @@ $(function(){
             },
             series: [{
               name: "HRV - 2",
+              dashStyle: 'longdash',
               data: []
             }]
         });

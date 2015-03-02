@@ -45,35 +45,39 @@ var server = http.createServer(function(req, res) {
 
 // Loading socket io module
 var io = require('socket.io').listen(server);
-var swisr, temprr = 0,rrstart, rrend, rrvalue, pagselect;
+var swisr, temprr = 0, rrstart, rrend, rrvalue, pagselect, date, dir;
+
+
 // When communication is established
-io.on('connection', function (socket) {
-    socket.on('changeState', function(data) {
-        var newData = JSON.parse(data);
-        if( newData.state==2){
-          //leer archivo rr e vector tempo
-          var rrbasal = readrr("rrbasal")
-          var rrtrain = readrr("rrtrain")
-          socket.emit("plotHRV-1",rrbasal);
-          socket.emit("plotHRV-2",rrtrain);
-        } else { handleChangeState(newData.state); }
-    });
+io.on('connection', function(socket) {
+	socket.on('changeState', function(data) {
+		var newData = JSON.parse(data);
+		if (newData.state == 2) {
+			//leer archivo rr e vector tempo
+			var rrbasal = readrr("rrbasal")
+			var rrtrain = readrr("rrtrain")
+			socket.emit("plotHRV-1", rrbasal);
+			socket.emit("plotHRV-2", rrtrain);
+		} else if (newData.state == 6) {
+			//code
+			socket.emit('showRR', (rrvalue));
+		} else {
+			handleChangeState(newData.state);
+		}
+	});
 });
 
 // Change led state when a button is pressed
 function handleChangeState(data) {
-	
+
 	console.log("LED = " + data);
 	// turns the LED ON or OFF
 	b.digitalWrite(led, data);
 	if (data === 4) {
 		pagselect = 1
-		if(fs.existsSync('rrbasal.txt')===true){
-		removefile("rrbasal")}
-		if(fs.existsSync('rrtrain.txt')===true){
-		removefile("rrtrain")}
+		newdir() // Crear nuevo directorio
 	}
-	if (data=== 5) {
+	if (data === 5) {
 		pagselect = 2
 	}
 	enableISR(data);
@@ -107,14 +111,14 @@ function interruptCallback(x) {
 			temprr = 1;
 		} else if (temprr == 1) {
 			rrend = now();
-			rrvalue = rrend - rrstart;
+			rrvalue = parseInt((rrend - rrstart), 10);
 			rrstart = rrend;
 			if (pagselect === 1) {
-				saverr("rrbasal", parseInt(rrvalue))
+				saverr("rrbasal", (rrvalue))
 			} else if (pagselect === 2) {
-				saverr("rrtrain", parseInt(rrvalue))
+				saverr("rrtrain", (rrvalue))
 			}
-			console.log("rr: " + parseInt(rrvalue) + "ms")
+			console.log("rr: " + (rrvalue) + "ms")
 		}
 		detach();
 		setTimeout(atach, 100); //bouncetime
@@ -126,28 +130,29 @@ function interruptCallback(x) {
 }
 
 function readrr(filename) {
-        var text = fs.readFileSync(String(filename)+'.txt','utf8')
-        var datarr = new Array();
-        var datarr = text.split('\n')
-        for (a in datarr ) {
-            datarr[a] = parseInt(datarr[a], 10); // Explicitly include base as per Álvaro's comment
-        }
-        return datarr;
+	var text = fs.readFileSync(dir+String(filename) + '.txt', 'utf8')
+	var datarr = new Array();
+	var datarr = text.split('\n')
+	for (a in datarr) {
+		datarr[a] = parseInt(datarr[a], 10); // Explicitly include base as per Álvaro's comment
+	}
+	return datarr;
 }
+
 function saverr(name, rr) {
-	fs.appendFile(String(name) + '.txt', String(rr) + "\n", function(err) {
+	fs.appendFile(dir+String(name) + '.txt', String(rr) + "\n", function(err) {
 		if (err) throw err;
-		console.log('The "data to append" was appended to file!');
+		//console.log('The "data to append" was appended to file!');
 	});
 }
 
 function removefile(name) {
-	
-	fse.remove(String(name) + '.txt', function (err) {
-  if (err) return console.error(err)
- 
-  console.log('success!')
-})
+
+	fse.remove(dir+String(name) + '.txt', function(err) {
+		if (err) return console.error(err)
+
+		console.log('success!')
+	})
 }
 
 function epython() {
@@ -166,6 +171,16 @@ function epython() {
 	});
 }
 
+function newdir(){
+	date = new Date().toISOString().substr(0, 16);
+	__dirname  = 'data/' 
+	dir =__dirname  + (date) + "/";
+	console.log(dir)
+	fse.mkdirs(dir, function (err) {
+	  if (err) return console.error(err)
+	  console.log("success!")
+	})
+}
 
 function detach() {
 	b.detachInterrupt(inputPin);

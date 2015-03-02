@@ -1,5 +1,5 @@
 {
-  "name": "HRV+BreathTraining",
+  "name": "HRVBreathTraining",
   "description": "",
   "version": "0.0.0",
   "main": "server.js",
@@ -11,6 +11,9 @@
       "python-shell" : "latest",
       "performance-now" : "latest",
       "bonescript" : "latest",
-      "fs-extra": "latest"
+      "fs-extra": "latest",
+      "mkdirp": "latest"
+
+      
   }
 }

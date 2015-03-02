@@ -3,7 +3,7 @@ $(function() {
 	function mostrar() {
 		//crono.html((+crono.html() + 0.1).toFixed(1));
 		tempo -= 1;
-
+		socket.emit('changeState', '{"state":6}');
 		if (tempo === 0) {
 			parar()
 			clearInterval(t);
@@ -76,7 +76,7 @@ $(function() {
 			//code
 			playSound();
 			tou_in = setTimeout(function() {
-				console.log("Time off");
+				//console.log("Time off");
 				controlRadio = 2;
 				temp = 1;
 				controlAnimate();
@@ -84,7 +84,7 @@ $(function() {
 		} else if (temp == 1) {
 			playSound();
 			tou_hold = setTimeout(function() {
-				console.log("Time off");
+				//console.log("Time off");
 				controlRadio = 3;
 				temp = 2;
 				controlAnimate();
@@ -92,7 +92,7 @@ $(function() {
 		} else if (temp == 2) {
 			playSound();
 			tou_out = setTimeout(function() {
-				console.log("Time off");
+				//console.log("Time off");
 				controlRadio = 4;
 				temp = 0;
 			}, 5000);
@@ -109,12 +109,12 @@ $(function() {
 			mensaje.html("IN");
 			myCircle.radius += 0.6;
 			drawCircle(myCircle, context);
-			console.log("aumenta radio");
+			//console.log("aumenta radio");
 			document.body.style.background = "#a6d8f1"; //change background color
 		} else if (controlRadio == 2) {
 			//code
 			mensaje.html("HOLD");
-			console.log("radio no aumenta");
+			//console.log("radio no aumenta");
 			drawCircle(myCircle, context);
 			document.body.style.background = "#FFBEA0"; //change background color
 		} else if (controlRadio == 3) {
@@ -122,12 +122,12 @@ $(function() {
 			mensaje.html("OUT");
 			myCircle.radius -= 0.6;
 			drawCircle(myCircle, context);
-			console.log("radio disminuye");
+			//console.log("radio disminuye");
 			document.body.style.background = "#EFE23E"; //change background color
 		} else if (controlRadio == 4) {
 			//code
 			controlRadio = 1;
-			console.log("radio reinicia");
+			//console.log("radio reinicia");
 			controlAnimate();
 		}
 
@@ -179,6 +179,10 @@ $(function() {
 	
 	var socket = io.connect();
 	socket.emit('changeState', '{"state":5}');
+	socket.on('showRR', function(data) {
+		//console.log("client receve rr: " + data);
+		document.getElementById("outputStatus").innerHTML = "rr: " + String(data);
+	});
 	document.body.style.background = "#a6d8f1"; //change background color
 	$("#arrancar").on("click", arrancar);
 	$("#cuerpo").on("load", loadSound());
